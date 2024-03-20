@@ -5,7 +5,6 @@ index.js
 server/dist/index.js
 scripts/flow/*/.flowconfig
 .flowconfig
-*~
 *.pyc
 .grunt
 _SpecRunner.html
