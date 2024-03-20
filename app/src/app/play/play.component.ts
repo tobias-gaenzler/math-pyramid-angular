@@ -1,20 +1,8 @@
 import {Component} from '@angular/core';
 import {MathPyramidModel, MathPyramidModelData} from "../math-pyramid/model";
-import {MatFormField} from "@angular/material/form-field";
-import {MatInput} from "@angular/material/input";
-import {NgForOf} from "@angular/common";
-import {MatCard, MatCardContent} from "@angular/material/card";
 
 @Component({
     selector: 'app-play',
-    standalone: true,
-    imports: [
-        MatFormField,
-        MatInput,
-        NgForOf,
-        MatCardContent,
-        MatCard
-    ],
     templateUrl: './play.component.html',
     styleUrl: './play.component.scss'
 })

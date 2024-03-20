@@ -11,8 +11,6 @@ export const routes: Routes = [
     { path: 'play', component: PlayComponent },
     { path: 'config', component: ConfigComponent },
     { path: '**', component: PageNotFoundComponent },
-    // {path: 'crisis', loadChildren: 'app/crisis/crisis.module#CrisisModule'},
-    // {path: 'heroes', loadChildren: 'app/hero/hero.module#HeroModule'}
 ];
 
 @NgModule({
