@@ -7,6 +7,7 @@ import {NoopAnimationsModule} from "@angular/platform-browser/animations";
 import {PlayModule} from "./play/play.module";
 import {PageNotFoundModule} from "./page-not-found/page.not.found.module";
 import {HelpPageModule} from "./help-page/help.page.module";
+import {ConfigModule} from "./config/config.module";
 
 @NgModule({
     imports: [
@@ -17,7 +18,8 @@ import {HelpPageModule} from "./help-page/help.page.module";
         NoopAnimationsModule,
         PlayModule,
         PageNotFoundModule,
-        HelpPageModule
+        HelpPageModule,
+        ConfigModule
     ],
     declarations: [AppComponent],
     bootstrap: [AppComponent]
