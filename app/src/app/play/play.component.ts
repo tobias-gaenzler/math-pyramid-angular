@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {MathPyramidModel, MathPyramidModelData} from "../math-pyramid/model";
+import {MathPyramidModel, MathPyramidModelData} from "../models/math-pyramid";
 
 @Component({
     selector: 'app-play',
@@ -7,9 +7,12 @@ import {MathPyramidModel, MathPyramidModelData} from "../math-pyramid/model";
     styleUrl: './play.component.scss'
 })
 export class PlayComponent {
-    private message: string = "{\"size\":3,\"startValues\":[null,18,null,25,26,null],\"solutionValues\":[7,18,8,25,26,51]}";
-    console: Console = console;
-    model: MathPyramidModel = new MathPyramidModel(JSON.parse(this.message) as MathPyramidModelData)
+    private modelData: MathPyramidModelData = {
+        size: 3,
+        startValues: [null, 18, null, 25, 26, null],
+        solutionValues: [7, 18, 8, 25, 26, 51]
+    };
+    model: MathPyramidModel = new MathPyramidModel(this.modelData)
 
     onKeydown(event: KeyboardEvent): void {
         if (!/\d/.test(event.key) &&
@@ -23,8 +26,6 @@ export class PlayComponent {
     }
 
     getIndex(row: number, column: number): number {
-        console.log("row: " + row);
-        console.log("column: " + column);
         // TODO: prepare proper rows to iterate over
         row = this.model.size - row - 1; //deviation from standard, as we can not do loops counting down in template,
         let index: number = 0
