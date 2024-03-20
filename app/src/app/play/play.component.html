@@ -1,0 +1,13 @@
+<ng-template ngFor [ngForOf]="[].constructor(model.size)" let-row="index">
+    <mat-card>
+        <mat-card-content>
+            <ng-template ngFor [ngForOf]="[].constructor(row + 1).reverse()" let-column="index">
+                <mat-form-field class="pyramid-field">
+                    <input matInput value="{{ model.startValues[getIndex(row, column)] }}" type="number"
+                           disabled="{{ model.startValues[getIndex(row, column)] !== null }}"
+                           (keydown)="onKeydown($event)">
+                </mat-form-field>
+            </ng-template>
+        </mat-card-content>
+    </mat-card>
+</ng-template>
