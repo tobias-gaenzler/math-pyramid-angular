@@ -24,19 +24,32 @@ class MathPyramidModel {
         this.userInput = Object.assign([], this.startValues)
     }
 
-    getIndex(rowId: number, colId: number): number {
+    index(rowId: number, colId: number): number {
         let index: number = 0
         // increase index by (size - i) for each row
         for (let i: number = 0; i < rowId; i = i + 1) {
             index = index + this.size - i
         }
         return index + colId
+
+    }
+    
+    value(rowId: number, colId: number): number {
+        return this.startValues[this.index(rowId, colId)]!
     }
 
-    isSolved() {
+    columnIndices(rowId: number): number[] {
+        return [...Array(this.size - rowId).keys()]
+    }
+
+    rowIndices(): number[] {
+        return [...Array(this.size).keys()].reverse()
+    }
+
+    solved() {
         return JSON.stringify(this.solutionValues) === JSON.stringify(this.userInput)
     }
 }
 
-export {MathPyramidModel}
-export type {MathPyramidModelData}
+export { MathPyramidModel }
+export type { MathPyramidModelData }
