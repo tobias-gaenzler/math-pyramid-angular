@@ -1,3 +1,4 @@
 <mat-form-field class="pyramid-field">
-    <input matInput value="{{ startValue() }}" type="number" (keydown)="onKeydown($event)" disabled="{{disabled()}}">
+    <input type="number" matInput [(ngModel)]="fieldValue" (input)="onChange()" (keydown)="onKeydown($event)"
+        disabled="{{disabled()}}">
 </mat-form-field>

@@ -33,9 +33,13 @@ class MathPyramidModel {
         return index + colId
 
     }
-    
-    value(rowId: number, colId: number): number {
+
+    startValue(rowId: number, colId: number): number {
         return this.startValues[this.index(rowId, colId)]!
+    }
+    
+    solutionValue(rowId: number, colId: number): number {
+        return this.solutionValues[this.index(rowId, colId)]!
     }
 
     columnIndices(rowId: number): number[] {

@@ -6,6 +6,7 @@ import { NgForOf } from "@angular/common";
 import { MatCard, MatCardContent } from "@angular/material/card";
 import { RowComponent } from "./row.component";
 import { FieldComponent } from './field.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
     declarations: [PlayComponent, RowComponent, FieldComponent],
@@ -14,7 +15,8 @@ import { FieldComponent } from './field.component';
         MatInput,
         NgForOf,
         MatCardContent,
-        MatCard
+        MatCard,
+        FormsModule
     ]
 })
 
