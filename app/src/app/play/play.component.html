@@ -1,4 +1,5 @@
-<mat-card *ngFor="let rowId of rowIndices()">
+<button (click)="sendMessage()">Send</button>
+<mat-card *ngFor="let rowId of model.rowIndices()">
     <mat-card-content>
         <row [rowId]="rowId" [model]="model"></row>
     </mat-card-content>
