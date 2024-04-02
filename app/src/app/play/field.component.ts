@@ -10,21 +10,21 @@ import { MathPyramidModel } from '../models/math-pyramid';
 export class FieldComponent implements OnInit {
     @Input() rowId!: number
     @Input() colId!: number
-    @Input() model!: MathPyramidModel
+    @Input() model: MathPyramidModel | undefined
     fieldValue: number | undefined;
     expectsUserInput: boolean = false;
     className: string = "pyramid-field";
 
     ngOnInit(): void {
-        this.fieldValue = this.getStartValue()!
-        this.expectsUserInput = (this.getStartValue() === null);
+        this.fieldValue = this.getStartValue()
+        this.expectsUserInput = (this.getStartValue() === null)
         if (!this.expectsUserInput) {
             this.className = "pyramid-field disabled"
         }
     }
 
     disabled(): boolean {
-        return (this.model.startValue(this.rowId, this.colId) !== null) ||
+        return (this.model?.startValue(this.rowId, this.colId) !== null) ||
             this.fieldValue === this.model.solutionValue(this.rowId, this.colId)
     }
 
@@ -32,7 +32,7 @@ export class FieldComponent implements OnInit {
         if (this.expectsUserInput) {
             if (this.fieldValue === null) {
                 this.className = "pyramid-field";
-            } else if (this.model.solutionValue(this.rowId, this.colId) === this.fieldValue) {
+            } else if (this.model?.solutionValue(this.rowId, this.colId) === this.fieldValue) {
                 this.className = "pyramid-field correct"
             } else {
                 this.className = "pyramid-field incorrect"
@@ -56,8 +56,8 @@ export class FieldComponent implements OnInit {
         }
     }
 
-    getStartValue(): number {
-        return this.model.startValue(this.rowId, this.colId)
+    getStartValue(): number | undefined {
+        return this.model ? this.model.startValue(this.rowId, this.colId) : undefined
     }
 }
 
