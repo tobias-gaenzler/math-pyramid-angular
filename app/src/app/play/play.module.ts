@@ -7,10 +7,12 @@ import { MatCard, MatCardContent } from "@angular/material/card";
 import { RowComponent } from "./row.component";
 import { FieldComponent } from './field.component';
 import { FormsModule } from '@angular/forms';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
     declarations: [PlayComponent, RowComponent, FieldComponent],
     imports: [
+        MatButtonModule,
         MatFormField,
         MatInput,
         NgForOf,

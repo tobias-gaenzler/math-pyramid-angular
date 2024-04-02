@@ -1,6 +1,7 @@
-<button *ngIf="model === undefined" (click)="sendMessage()">Start</button>
 <mat-card *ngFor="let rowId of model?.rowIndices()">
     <mat-card-content>
         <row [rowId]="rowId" [model]="model"></row>
     </mat-card-content>
 </mat-card>
+<button id="start" mat-stroked-button *ngIf="model === undefined" (click)="sendMessage()">Start</button>
+<button id="restart" mat-stroked-button *ngIf="model !== undefined" (click)="sendMessage()">Restart</button>
