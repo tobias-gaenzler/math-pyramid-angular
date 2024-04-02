@@ -40,8 +40,6 @@ export class FieldComponent implements OnInit {
         } else {
             this.className = "pyramid-field disabled"
         }
-        console.log(this.fieldValue)
-        console.log(this.className)
     }
 
     onKeydown(event: KeyboardEvent): void {
