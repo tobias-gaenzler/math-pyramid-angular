@@ -1,4 +1,4 @@
-<button (click)="sendMessage()">Start</button>
+<button *ngIf="model === undefined" (click)="sendMessage()">Start</button>
 <mat-card *ngFor="let rowId of model?.rowIndices()">
     <mat-card-content>
         <row [rowId]="rowId" [model]="model"></row>
