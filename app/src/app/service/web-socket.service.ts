@@ -31,7 +31,7 @@ export class WebsocketService {
         }
     }
 
-    sendUser(): void {
+    private sendUser(): void {
         if (this.isReady()) {
             this.socket!.send(`{ "action": "username", "sender": "${this.userService.getUserName()}" }`)
         }
@@ -43,7 +43,7 @@ export class WebsocketService {
         }
     }
 
-    private isReady(): boolean {
+    isReady(): boolean {
         return this.socket?.readyState == 1
     }
 

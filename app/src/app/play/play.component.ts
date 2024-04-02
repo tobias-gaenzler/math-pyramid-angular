@@ -1,7 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MathPyramidModel, MathPyramidModelData } from "../models/math-pyramid";
+import { MathPyramidModel } from "../models/math-pyramid";
 import { WebsocketService } from '../service/web-socket.service';
-import { Subject, map } from 'rxjs';
 
 @Component({
     selector: 'app-play',
@@ -17,15 +16,20 @@ export class PlayComponent implements OnDestroy, OnInit {
 
     ngOnInit(): void {
         this.websocketService.connect((event: MessageEvent<any>) => {
+            console.log(event.data)
             this.model = new MathPyramidModel(JSON.parse(event.data))
         })
     }
 
-    sendMessage() {
+    sendRestart(): void {
         this.websocketService.sendRestart()
     }
 
-    ngOnDestroy() {
+    isReady(): boolean {
+        return this.websocketService.isReady()
+    }
+
+    ngOnDestroy(): void {
         this.websocketService.close()
     }
 }

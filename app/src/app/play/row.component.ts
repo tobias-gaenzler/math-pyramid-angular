@@ -8,9 +8,5 @@ import { MathPyramidModel } from '../models/math-pyramid';
 })
 export class RowComponent {
     @Input() rowId!: number;
-    @Input() model: MathPyramidModel | undefined;
-
-    getColumnIndices(): number[] {
-        return this.model ? this.model.columnIndices(this.rowId) : []
-    }
+    @Input() model!: MathPyramidModel;
 }
