@@ -13,14 +13,14 @@ export class UserService {
             return this.userName
         }
         const userNameForLocalStorage = localStorage.getItem("userName")
-        if (userNameForLocalStorage) {
-            console.log(`Use username from local storage: ${userNameForLocalStorage}`)
-            this.setUserName(JSON.parse(userNameForLocalStorage))
-        } else {
+        if (userNameForLocalStorage === undefined || userNameForLocalStorage === null) {
             const newUserName = uniqueNamesGenerator(config)
             this.setUserName(newUserName)
             console.log("creating new username: " + newUserName)
             localStorage.setItem("userName", JSON.stringify(newUserName))
+        } else {
+            console.log(`Use username from local storage: ${userNameForLocalStorage}`)
+            this.setUserName(JSON.parse(userNameForLocalStorage))
         }
         return this.userName;
     }

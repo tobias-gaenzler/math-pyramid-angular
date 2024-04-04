@@ -5,6 +5,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { AppRoutingModule } from '../app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { UserNameDialog } from './user-name-dialog';
+
 
 @Component({
     selector: 'toolbar',
@@ -16,16 +19,29 @@ import { BrowserModule } from '@angular/platform-browser';
         MatButtonModule,
         MatIconModule,
         AppRoutingModule,
-        BrowserModule
+        BrowserModule,
+        MatDialogModule
     ]
 })
 export class ToolbarComponent {
-    title = 'Math Pyramid';
+    title: string = 'Math Pyramid'
+    name: string
 
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, public dialog: MatDialog) {
+        this.name = userService.getUserName()
     }
 
-    getUserName() {
-        return this.userService.getUserName()
+    openDialog() {
+        const dialogRef = this.dialog.open(UserNameDialog, {
+            data: { name: this.name }
+        });
+
+        dialogRef.afterClosed().subscribe(result => {
+            if (result === undefined || result === null || result === "") {
+                return
+            }
+            this.userService.setUserName(result)
+            this.name = result
+        });
     }
 }

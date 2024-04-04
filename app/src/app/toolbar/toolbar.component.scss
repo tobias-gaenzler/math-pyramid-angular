@@ -2,10 +2,13 @@
   flex: 1 1 auto;
 }
 
-mat-toolbar {
+mat-toolbar.mat-toolbar {
   --mat-toolbar-standard-height: 2.8em;
   background-color: rgb(25, 118, 210);
   color: rgb(255, 255, 255);
+  .mat-mdc-button {
+    color: white;
+  }
   .title {
     font-size: 1.5rem;
     color: rgb(255, 255, 255);
@@ -16,7 +19,8 @@ mat-toolbar {
     margin-left: 1em;
     font-size: 1em;
   }
-  .play-text, .user-name {
+  .play-text,
+  .user-name {
     font-size: 0.7em;
     margin-left: -0.5em;
     margin-right: 1em;

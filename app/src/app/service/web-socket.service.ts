@@ -33,6 +33,7 @@ export class WebsocketService {
 
     private sendUser(): void {
         if (this.isReady()) {
+            console.log(`Sending user name: ${this.userService.getUserName()}`)
             this.socket!.send(`{ "action": "username", "sender": "${this.userService.getUserName()}" }`)
         }
     }
