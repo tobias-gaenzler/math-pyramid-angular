@@ -11,8 +11,11 @@ import { ConfigModule } from "./config/config.module";
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 @NgModule({
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
     imports: [
         BrowserModule,
         CoreModule,
@@ -25,10 +28,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
         ConfigModule,
         MatToolbarModule,
         MatButtonModule,
-        MatIconModule
-    ],
-    declarations: [AppComponent],
-    bootstrap: [AppComponent]
+        MatIconModule,
+        ToolbarComponent
+    ]
 })
 export class AppModule {
 }

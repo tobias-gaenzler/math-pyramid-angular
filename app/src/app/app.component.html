@@ -1,20 +1,5 @@
 <div class="wrapper">
-    <mat-toolbar>
-        <button class="nav-item nav-link-edit title" [routerLink]="['/play']" mat-button>{{ title | uppercase
-            }}</button>
-        <button class="nav-item nav-link-edit play-button" [routerLink]="['/play']" mat-icon-button aria-label="Play">
-            <mat-icon>play_circle_outline</mat-icon>
-        </button>
-        <span class="play-text">Play</span>
-        <span class="spacer"></span>
-        <button mat-icon-button aria-label="Username">
-            <mat-icon>account_circle_outline</mat-icon>
-        </button>
-        <span class="user-name">{{getUserName()}}</span>
-        <button class="nav-item nav-link-edit" [routerLink]="['/help']" mat-icon-button aria-label="Help">
-            <mat-icon>help_outline</mat-icon>
-        </button>
-    </mat-toolbar>
+    <toolbar></toolbar>
     <div>
         <router-outlet></router-outlet>
     </div>

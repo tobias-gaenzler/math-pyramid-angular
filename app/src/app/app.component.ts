@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { UserService } from './service/user.service';
 
 @Component({
     selector: 'app-root',
@@ -7,11 +6,5 @@ import { UserService } from './service/user.service';
     styleUrl: './app.component.scss'
 })
 export class AppComponent {
-    constructor(private userService: UserService) {
-    }
 
-    title = 'Math Pyramid';
-    getUserName() {
-        return this.userService.getUserName()
-    }
 }
