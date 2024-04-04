@@ -10,7 +10,7 @@
         <button mat-icon-button aria-label="Username">
             <mat-icon>account_circle_outline</mat-icon>
         </button>
-        <span class="user-name">Tobias</span>
+        <span class="user-name">{{getUserName()}}</span>
         <button class="nav-item nav-link-edit" [routerLink]="['/help']" mat-icon-button aria-label="Help">
             <mat-icon>help_outline</mat-icon>
         </button>
