@@ -40,7 +40,7 @@ export class WebsocketService {
 
     sendRestart(): void {
         if (this.isReady()) {
-            this.socket!.send('{ "action": "start",   "sender": "${this.userService.getUserName()}", "data": { "size": 3, "maxValue": 100 } }')
+            this.socket!.send(`{ "action": "start",   "sender": "${this.userService.getUserName()}", "data": { "size": 3, "maxValue": 100 } }`)
         }
     }
 
