@@ -9,6 +9,9 @@ const config: Config = { dictionaries: [names] }
 export class UserService {
     private userName: string = "";
     getUserName(): string {
+        if (this.userName !== "") {
+            return this.userName
+        }
         const userNameForLocalStorage = localStorage.getItem("userName")
         if (userNameForLocalStorage) {
             console.log(`Use username from local storage: ${userNameForLocalStorage}`)
