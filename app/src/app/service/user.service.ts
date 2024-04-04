@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Config, names, uniqueNamesGenerator } from "unique-names-generator"
+import { WebsocketService } from './web-socket.service';
 
 const config: Config = { dictionaries: [names] }
 
@@ -8,6 +9,7 @@ const config: Config = { dictionaries: [names] }
 })
 export class UserService {
     private userName: string = "";
+
     getUserName(): string {
         if (this.userName !== "") {
             return this.userName

@@ -7,7 +7,7 @@ import { WebsocketService } from '../service/web-socket.service';
     templateUrl: './play.component.html',
     styleUrl: './play.component.scss'
 })
-export class PlayComponent implements OnDestroy, OnInit {
+export class PlayComponent {
 
     model: MathPyramidModel | undefined
 
@@ -15,7 +15,7 @@ export class PlayComponent implements OnDestroy, OnInit {
     }
 
     ngOnInit(): void {
-        this.websocketService.connect((event: MessageEvent<any>) => {
+        this.websocketService.addListener((event: MessageEvent<any>) => {
             console.log(event.data)
             this.model = new MathPyramidModel(JSON.parse(event.data))
         })
@@ -29,7 +29,4 @@ export class PlayComponent implements OnDestroy, OnInit {
         return this.websocketService.isReady()
     }
 
-    ngOnDestroy(): void {
-        this.websocketService.close()
-    }
 }

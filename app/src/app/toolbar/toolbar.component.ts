@@ -7,6 +7,7 @@ import { AppRoutingModule } from '../app-routing.module';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { UserNameDialog } from './user-name-dialog';
+import { WebsocketService } from '../service/web-socket.service';
 
 
 @Component({
@@ -27,7 +28,7 @@ export class ToolbarComponent {
     title: string = 'Math Pyramid'
     name: string
 
-    constructor(private userService: UserService, public dialog: MatDialog) {
+    constructor(private userService: UserService, public dialog: MatDialog, private websocketService: WebsocketService) {
         this.name = userService.getUserName()
     }
 
@@ -41,6 +42,7 @@ export class ToolbarComponent {
                 return
             }
             this.userService.setUserName(result)
+            this.websocketService.sendUserName()
             this.name = result
         });
     }

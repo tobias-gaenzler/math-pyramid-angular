@@ -7,11 +7,16 @@ import { Observable, Observer, Subject } from 'rxjs'
 })
 export class WebsocketService {
     private socket: WebSocket | undefined;
+    private listeners: ((event: MessageEvent<any>) => void)[] = []
 
     constructor(private userService: UserService) {
     }
 
-    connect(onMessageCallback: (event: MessageEvent<any>) => void): void {
+    addListener(onMessageCallback: (event: MessageEvent<any>) => void) {
+        this.listeners.push(onMessageCallback)
+    }
+
+    connect(): void {
         this.socket = new WebSocket('ws://localhost:3000')
         this.socket.onopen = () => {
             console.log('WebSocket connection established.')
@@ -19,7 +24,9 @@ export class WebsocketService {
         };
 
         this.socket.onmessage = (event) => {
-            onMessageCallback(event)
+            this.listeners.forEach(function (callback) {
+                callback(event)
+            })
         }
 
         this.socket.onclose = (event) => {
@@ -29,6 +36,10 @@ export class WebsocketService {
         this.socket.onerror = (error) => {
             console.error('WebSocket error:', error)
         }
+    }
+
+    sendUserName() {
+        this.sendUser()
     }
 
     private sendUser(): void {
