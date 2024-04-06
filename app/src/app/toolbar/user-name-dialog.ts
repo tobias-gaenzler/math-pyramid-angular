@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, HostListener, Inject } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -26,4 +26,12 @@ export class UserNameDialog {
         public dialogRef: MatDialogRef<UserNameDialog>,
         @Inject(MAT_DIALOG_DATA) public data: DialogData,
     ) { }
+
+    @HostListener('window:keyup.Enter', ['$event'])
+    onDialogClick(event: KeyboardEvent): void {
+        this.close();
+    }
+    close(): void {
+        this.dialogRef.close(this.data.name);
+    }
 }
