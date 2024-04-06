@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MathPyramidModel } from "../models/math-pyramid";
 import { WebsocketService } from '../service/web-socket.service';
 
@@ -16,8 +16,18 @@ export class PlayComponent {
 
     ngOnInit(): void {
         this.websocketService.addListener((event: MessageEvent<any>) => {
-            console.log(event.data)
-            this.model = new MathPyramidModel(JSON.parse(event.data))
+            if (event.data.includes("\"action\":\"message\"")) {
+                console.log(`Received message: ${event.data}`)
+                // setSolvedBy(JSON.parse(message).sender)
+                // setStartTime(0)
+                // setSolveTime(JSON.parse(message).solveTime)
+            } else {
+                console.log(`[${new Date().toISOString()}]: Game started, received new model`)
+                this.model = new MathPyramidModel(JSON.parse(event.data))
+                // setSolvedBy("")
+                // setStartTime(new Date().getTime())
+                // setSolveTime(0)
+            }
         })
     }
 
