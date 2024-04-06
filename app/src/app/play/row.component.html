@@ -1,3 +1,4 @@
 <ng-template ngFor let-colId [ngForOf]="model.columnIndices(rowId)">
-    <field [startValue]="model.startValue(rowId, colId)" [solutionValue]="model.solutionValue(rowId, colId)"></field>
+    <field [startValue]="model.startValue(rowId, colId)" [solutionValue]="model.solutionValue(rowId, colId)"
+        [index]="model.index(rowId, colId)"></field>
 </ng-template>

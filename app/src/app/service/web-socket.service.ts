@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
-import { Observable, Observer, Subject } from 'rxjs'
 
 @Injectable({
     providedIn: 'root'
@@ -49,9 +48,16 @@ export class WebsocketService {
         }
     }
 
+    sendGameSolved() {
+        const userName = this.userService.getUserName()
+        if (this.isReady()) {
+            this.socket!.send(`{ "action": "message",  "sender": "${userName}", "solveTime": "100", "data": "Pyramid solved by: ${userName}" }`)
+        }
+    }
+
     sendRestart(): void {
         if (this.isReady()) {
-            this.socket!.send(`{ "action": "start",   "sender": "${this.userService.getUserName()}", "data": { "size": 3, "maxValue": 100 } }`)
+            this.socket!.send(`{ "action": "start",  "sender": "${this.userService.getUserName()}", "data": { "size": 3, "maxValue": 100 } }`)
         }
     }
 

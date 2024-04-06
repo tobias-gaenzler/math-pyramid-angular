@@ -1,4 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
+import { GameService } from '../service/game.service';
 
 @Component({
     selector: 'field',
@@ -8,10 +9,14 @@ import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation }
 })
 export class FieldComponent implements OnInit, OnChanges {
     @Input() startValue!: number | null
-    @Input() solutionValue!: number | null
+    @Input() solutionValue!: number
+    @Input() index!: number
     fieldValue: number | undefined;
     private expectsUserInput: boolean = false;
     className: string = "pyramid-field";
+
+    constructor(private gameService: GameService) { }
+
 
     ngOnInit(): void {
         this.fieldValue = this.startValue ? this.startValue : undefined
@@ -36,6 +41,7 @@ export class FieldComponent implements OnInit, OnChanges {
             if (this.fieldValue === null) {
                 this.className = "pyramid-field";
             } else if (this.solutionValue === this.fieldValue) {
+                this.gameService.userInput(this.index, this.fieldValue)
                 this.className = "pyramid-field correct"
             } else {
                 this.className = "pyramid-field incorrect"
