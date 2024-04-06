@@ -1,5 +1,4 @@
-import { ApplicationRef, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { MathPyramidModel } from '../models/math-pyramid';
+import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
 
 @Component({
     selector: 'field',
