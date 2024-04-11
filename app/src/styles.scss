@@ -6,3 +6,18 @@ body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.winner game-solved-dialog mat-card {
+  background-color: green;
+  color: white;
+}
+
+.looser game-solved-dialog mat-card {
+  background-color: rgb(211, 47, 47);
+  color: white;
+}
+ 
+game-solved-dialog mat-card mat-icon {
+  vertical-align: middle;
+}
+ 

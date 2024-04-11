@@ -1,0 +1,12 @@
+<mat-dialog-content class="mat-typography">
+    <mat-card>
+        <mat-card-content>
+            <mat-icon *ngIf="data.style === 'winner'">check_circle_outline</mat-icon>
+            <mat-icon *ngIf="data.style === 'looser'">highlight_off_outline</mat-icon>
+            {{data.title}}
+        </mat-card-content>
+    </mat-card>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close cdkFocusInitial>Close</button>
+</mat-dialog-actions>

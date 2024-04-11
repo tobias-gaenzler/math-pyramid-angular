@@ -20,16 +20,20 @@ export class GameService {
         this.startTime = new Date().getTime()
         this.solveTime = 0
     }
-    stopGame(sender: string, solveTime: number) {
+
+    gameSolved(sender: string, solveTime: number) {
         this.solvedBy = sender
         this.startTime = 0
         this.solveTime = solveTime
     }
+
     userInput(index: number, input: number) {
-        this.model!.userInput[index] = input
-        if (this.model?.solved()) {
-            console.log("Game solved")
-            this.webSocketService.sendGameSolved()
+        if (this.model) {
+            this.model.userInput[index] = input
+            if (this.model?.solved()) {
+                console.log('Game solved')
+                this.webSocketService.sendGameSolved(new Date().getTime() - this.startTime)
+            }
         }
     }
 }

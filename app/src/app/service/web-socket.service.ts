@@ -48,10 +48,10 @@ export class WebsocketService {
         }
     }
 
-    sendGameSolved() {
+    sendGameSolved(solveTime: number) {
         const userName = this.userService.getUserName()
         if (this.isReady()) {
-            this.socket!.send(`{ "action": "message",  "sender": "${userName}", "solveTime": "100", "data": "Pyramid solved by: ${userName}" }`)
+            this.socket!.send(`{ "action": "message",  "sender": "${userName}", "solveTime": "${solveTime}", "data": "Pyramid solved by: ${userName}" }`)
         }
     }
 
