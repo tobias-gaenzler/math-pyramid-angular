@@ -8,9 +8,9 @@ export class CloseHandler {
         this.userManager = userManager;
     }
 
-    handleClose(webSocket: ws, exitCode: number): void {
-        const user = this.userManager.getUser(webSocket);
-        console.log(`User ${user?.toString()} is leaving the game with code: ${exitCode}`);
-        this.userManager.deleteUser(webSocket);
+    handleClose(socket: ws, exitCode: number): void {
+        const user = this.userManager.getUser(socket);
+        console.info(`User ${user?.toString()} is leaving the game with code: ${exitCode}`);
+        this.userManager.deleteUser(socket);
     }
 }

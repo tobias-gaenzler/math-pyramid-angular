@@ -3,8 +3,7 @@ import type ws from 'ws';
 import { MessageHandler } from './MessageHandler';
 import expressWs = require('express-ws')
 import express from 'express';
-
-// TODO: refactor test to mock user manager and web socket server. Add test for start message.
+import e = require('express');
 
 describe('MessageHandler', () => {
 
@@ -14,6 +13,7 @@ describe('MessageHandler', () => {
 
     beforeEach(() => {
         userManager = new UserManager();
+        wsMock = {} as jest.MockedObject<ws>;
         userManager.addUser(wsMock, '1');
         messageHandler = new MessageHandler(userManager, expressWs(express()));
     });
@@ -40,5 +40,19 @@ describe('MessageHandler', () => {
 
         // Act & Assert
         expect(() => messageHandler.handleMessage(wsMock, rawMessage)).toThrow('Received unknown event: unknown');
+    });
+
+    test('handleMessage should broadcast game data on action start', () => {
+        // Arrange
+        const broadcastSpy = jest.spyOn(messageHandler as any, 'broadcastMessage');
+        const rawMessage = { data: JSON.stringify({ action: 'start', data: { size: '3', maxValue: '10' } }), type: 'type', target: wsMock };
+
+        // Act
+        messageHandler.handleMessage(wsMock, rawMessage);
+
+        // Assert
+        expect(broadcastSpy).toHaveBeenCalledWith(
+            expect.stringContaining("\"solutionValues\":[1,1,1,2,2,4]")
+        )
     });
 });

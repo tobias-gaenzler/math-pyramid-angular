@@ -4,7 +4,7 @@ import { expect, jest, test } from '@jest/globals';
 import type ws from 'ws';
 
 describe('ErrorHandler', () => {
-    let mockedWs: jest.MockedObject<ws>;
+    let mockedWs: jest.MockedObject<ws> = {} as jest.MockedObject<ws>;
     let userManager: UserManager;
     let closeHandler: ErrorHandler;
 
