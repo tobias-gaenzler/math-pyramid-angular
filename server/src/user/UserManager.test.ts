@@ -45,7 +45,7 @@ describe('UserManager', () => {
     test('setUserName should throw an error if user does not exist', () => {
         expect(() => {
             userManager.setUserName(mockWs, 'John Doe');
-        }).toThrow('Can not find user John Doe');
+        }).toThrow('Cannot find user John Doe, client: {}');
     });
 
     test('deleteUser should remove the user from the map', () => {
