@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { UserService } from './user.service';
+import { ConfigService } from './config.service';
 
 @Injectable({
     providedIn: 'root'
@@ -8,7 +9,7 @@ export class WebsocketService {
     private socket: WebSocket | undefined;
     private listeners: ((event: MessageEvent<any>) => void)[] = [];
 
-    constructor(private userService: UserService) {}
+    constructor(private userService: UserService, private configService: ConfigService) {}
 
     addListener(onMessageCallback: (event: MessageEvent<any>) => void): void {
         this.listeners.push(onMessageCallback);
@@ -58,7 +59,8 @@ export class WebsocketService {
     sendRestart(): void {
         if (this.isReady()) {
             const userName = this.userService.getUserName();
-            this.socket!.send(JSON.stringify({ action: 'start', sender: userName, data: { size: 3, maxValue: 100 } }));
+            const maxValue = this.configService.getMaxValue();
+            this.socket!.send(JSON.stringify({ action: 'start', sender: userName, data: { size: this.configService.getSize(), maxValue: maxValue } }));
         }
     }
 

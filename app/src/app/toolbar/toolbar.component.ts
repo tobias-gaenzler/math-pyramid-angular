@@ -9,6 +9,9 @@ import { UserService } from '../service/user.service';
 import { AppRoutingModule } from '../app-routing.module';
 import { UserNameDialog } from './user-name-dialog';
 import { WebsocketService } from '../service/web-socket.service';
+import { ConfigDialog } from './config-dialog';
+import { config } from 'rxjs';
+import { ConfigService } from '../service/config.service';
 
 @Component({
     selector: 'toolbar',
@@ -27,12 +30,16 @@ import { WebsocketService } from '../service/web-socket.service';
 export class ToolbarComponent {
     title: string = 'Math Pyramid';
     name: string;
+    size: number;
+    maxValue: number;
 
-    constructor(private userService: UserService, public dialog: MatDialog, private websocketService: WebsocketService) {
+    constructor(private userService: UserService, private configService: ConfigService, public dialog: MatDialog, private websocketService: WebsocketService) {
         this.name = userService.getUserName();
+        this.size = 3;
+        this.maxValue = 100;
     }
 
-    openDialog(): void {
+    openUserNameDialog(): void {
         const dialogRef = this.dialog
             .open(UserNameDialog, {
                 data: { name: this.name }
@@ -47,5 +54,24 @@ export class ToolbarComponent {
                 },
                 error: (error) => console.error('Dialog closed with error:', error)
             });
+        }
+        
+        
+    openConfigDialog(): void {
+        const dialogRef = this.dialog
+        .open(ConfigDialog, {
+            data: { size: this.size, maxValue: this.maxValue }
+        })
+        .afterClosed().subscribe({
+            next: (value) => {
+                if (value) {
+                    this.configService.setSize(value.size);
+                    this.size = value.size;
+                    this.configService.setMaxValue(value.maxValue);
+                    this.maxValue = value.maxValue;
+                }
+            },
+            error: (error) => console.error('Dialog closed with error:', error)
+        });
     }
 }

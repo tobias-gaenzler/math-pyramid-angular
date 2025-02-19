@@ -7,10 +7,13 @@
         <span class="play-text">Play</span>
     </button>
     <span class="spacer"></span>
-    <button (click)="openDialog()" mat-icon-button aria-label="Username">
+    <button (click)="openUserNameDialog()" mat-icon-button aria-label="Username">
         <mat-icon>account_circle_outline</mat-icon>
     </button>
-    <button mat-button class="user-name" (click)="openDialog()">{{ name }}</button>
+    <button mat-button class="user-name" (click)="openUserNameDialog()">{{ name }}</button>
+    <button (click)="openConfigDialog()" mat-icon-button aria-label="config">
+        <mat-icon>settings</mat-icon>
+    </button>
     <button class="help-button" [routerLink]="['/help']" mat-icon-button aria-label="Help">
         <mat-icon>help_outline</mat-icon>
     </button>

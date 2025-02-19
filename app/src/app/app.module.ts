@@ -14,7 +14,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { PlayModule } from './play/play.module';
 import { PageNotFoundModule } from './page-not-found/page.not.found.module';
 import { HelpPageModule } from './help-page/help.page.module';
-import { ConfigModule } from './config/config.module';
 
 @NgModule({
     declarations: [
@@ -28,7 +27,6 @@ import { ConfigModule } from './config/config.module';
         PlayModule,
         PageNotFoundModule,
         HelpPageModule,
-        ConfigModule,
         MatToolbarModule,
         MatButtonModule,
         MatIconModule,
