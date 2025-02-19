@@ -1,16 +1,17 @@
 <mat-toolbar>
-    <button class="nav-item nav-link-edit title" [routerLink]="['/play']" mat-button>
-        {{ title | uppercase}}</button>
-    <button class="nav-item nav-link-edit play-button" [routerLink]="['/play']" mat-icon-button aria-label="Play">
-        <mat-icon>play_circle_outline</mat-icon>
+    <button class="title" [routerLink]="['/play']" mat-button aria-label="Play Math Pyramid">
+        {{ title | uppercase }}
     </button>
-    <span class="play-text">Play</span>
+    <button class="play-button" [routerLink]="['/play']" mat-icon-button aria-label="Play">
+        <span color="white" class="material-icons">play_circle_outline</span>
+        <span class="play-text">Play</span>
+    </button>
     <span class="spacer"></span>
     <button (click)="openDialog()" mat-icon-button aria-label="Username">
         <mat-icon>account_circle_outline</mat-icon>
     </button>
-    <button mat-button class="user-name" (click)="openDialog()">{{name}}</button>
-    <button class="nav-item nav-link-edit" [routerLink]="['/help']" mat-icon-button aria-label="Help">
+    <button mat-button class="user-name" (click)="openDialog()">{{ name }}</button>
+    <button class="help-button" [routerLink]="['/help']" mat-icon-button aria-label="Help">
         <mat-icon>help_outline</mat-icon>
     </button>
 </mat-toolbar>
