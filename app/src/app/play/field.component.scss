@@ -1,3 +1,19 @@
+:root {
+  --border-color: grey;
+  --text-align: center;
+  --text-color: grey;
+  --font-weight: 500;
+  --font-size: 1em;
+  --margin-top: 1em;
+  --margin-bottom: 1em;
+  --width: 5em;
+  --disabled-bg-color: lightgray;
+  --correct-bg-color: lightgreen;
+  --incorrect-bg-color: lightpink;
+  --small-screen-margin: 1.25em;
+  --large-screen-margin: 3em;
+}
+
 /* Chrome, Safari, Edge, Opera */
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -6,7 +22,7 @@ input::-webkit-inner-spin-button {
 }
 
 .mdc-notched-outline > * {
-  border-color: grey !important;
+  border-color: var(--border-color) !important;
 }
 
 .mdc-text-field--outlined {
@@ -19,36 +35,40 @@ input::-webkit-inner-spin-button {
     appearance: textfield;
   }
 
-  margin-top: 1em;
-  margin-bottom: 1em;
-  width: 5em;
+  margin-top: var(--margin-top);
+  margin-bottom: var(--margin-bottom);
+  width: var(--width);
+
   .mdc-text-field input.mat-mdc-input-element {
-    text-align: center;
-    color: grey;
-    font-weight: 500;
-    font-size: 1em;
+    text-align: var(--text-align);
+    color: var(--text-color);
+    font-weight: var(--font-weight);
+    font-size: var(--font-size);
+  }
+
+  &.disabled {
+    background-color: var(--disabled-bg-color);
+  }
+
+  &.correct {
+    background-color: var(--correct-bg-color);
+  }
+
+  &.incorrect {
+    background-color: var(--incorrect-bg-color);
   }
 }
 
 @media only screen and (max-width: 549px) {
   .pyramid-field {
-    margin-right: 1.25em;
-    margin-left: 1.25em;
-  }
-}
-@media only screen and (min-width: 550px) {
-  .pyramid-field {
-    margin-right: 3em;
-    margin-left: 3em;
+    margin-right: var(--small-screen-margin);
+    margin-left: var(--small-screen-margin);
   }
 }
 
-.pyramid-field.disabled {
-  background-color: lightgray;
-}
-.pyramid-field.correct {
-  background-color: lightgreen;
-}
-.pyramid-field.incorrect {
-  background-color: lightpink;
+@media only screen and (min-width: 550px) {
+  .pyramid-field {
+    margin-right: var(--large-screen-margin);
+    margin-left: var(--large-screen-margin);
+  }
 }
