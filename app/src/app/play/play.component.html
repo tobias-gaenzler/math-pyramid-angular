@@ -1,9 +1,11 @@
-<ng-template [ngIf]="model !== undefined">
+<ng-template [ngIf]="model">
     <mat-card *ngFor="let rowId of model.rowIndices()">
         <mat-card-content>
             <row [rowId]="rowId" [model]="model"></row>
         </mat-card-content>
     </mat-card>
-    <button id="restart" mat-stroked-button (click)="sendRestart()">Restart</button>
+    <button id="restart" mat-stroked-button (click)="sendRestart()" aria-label="Restart Game">Restart</button>
 </ng-template>
-<button id="start" mat-stroked-button *ngIf="model === undefined && isReady()" (click)="sendRestart()">Start</button>
+<ng-template [ngIf]="!model && isReady()">
+    <button id="start" mat-stroked-button (click)="sendRestart()" aria-label="Start Game">Start</button>
+</ng-template>
