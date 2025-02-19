@@ -1,4 +1,4 @@
-<mat-form-field class="{{ className }}" subscriptSizing="dynamic" appearance="outline">
+<mat-form-field [class]="className" subscriptSizing="dynamic" appearance="outline">
     <input type="number" matInput [(ngModel)]="fieldValue" (input)="onChange()" (keydown)="onKeydown($event)"
-        disabled="{{disabled()}}">
+        [disabled]="disabled()" aria-label="Field Value">
 </mat-form-field>

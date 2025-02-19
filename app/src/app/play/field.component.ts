@@ -4,36 +4,35 @@ import { GameService } from '../service/game.service';
 @Component({
     selector: 'field',
     templateUrl: './field.component.html',
-    styleUrl: './field.component.scss',
+    styleUrls: ['./field.component.scss'],
     encapsulation: ViewEncapsulation.None
 })
 export class FieldComponent implements OnInit, OnChanges {
-    @Input() startValue!: number | null
-    @Input() solutionValue!: number
-    @Input() index!: number
+    @Input() startValue!: number | null;
+    @Input() solutionValue!: number;
+    @Input() index!: number;
     fieldValue: number | undefined;
-    private expectsUserInput: boolean = false;
+    expectsUserInput: boolean = false;
     className: string = "pyramid-field";
 
     constructor(private gameService: GameService) { }
 
-
     ngOnInit(): void {
-        this.fieldValue = this.startValue ? this.startValue : undefined
-        this.expectsUserInput = (this.startValue === null)
-        if (this.expectsUserInput) {
-            this.className = "pyramid-field"
-        } else {
-            this.className = "pyramid-field disabled"
-        }
+        this.initializeField();
     }
 
     ngOnChanges(changes: SimpleChanges): void {
         this.ngOnInit()
     }
 
+    private initializeField(): void {
+        this.fieldValue = this.startValue ?? undefined;
+        this.expectsUserInput = this.startValue === null;
+        this.className = this.expectsUserInput ? "pyramid-field" : "pyramid-field disabled";
+    }
+
     disabled(): boolean {
-        return this.startValue !== null || this.fieldValue === this.solutionValue
+        return this.startValue !== null || this.fieldValue === this.solutionValue;
     }
 
     onChange(): void {
@@ -41,25 +40,20 @@ export class FieldComponent implements OnInit, OnChanges {
             if (this.fieldValue === null) {
                 this.className = "pyramid-field";
             } else if (this.solutionValue === this.fieldValue) {
-                this.gameService.userInput(this.index, this.fieldValue)
-                this.className = "pyramid-field correct"
+                this.gameService.userInput(this.index, this.fieldValue);
+                this.className = "pyramid-field correct";
             } else {
-                this.className = "pyramid-field incorrect"
+                this.className = "pyramid-field incorrect";
             }
         } else {
-            this.className = "pyramid-field disabled"
+            this.className = "pyramid-field disabled";
         }
     }
 
     onKeydown(event: KeyboardEvent): void {
-        if (!/\d/.test(event.key) &&
-            !/Backspace/.test(event.key) &&
-            !/Tab/.test(event.key) &&
-            !/Delete/.test(event.key) &&
-            !/ArrowLeft/.test(event.key) &&
-            !/ArrowRight/.test(event.key)
-        ) {
-            event.preventDefault()
+        const allowedKeys = ['Backspace', 'Tab', 'Delete', 'ArrowLeft', 'ArrowRight'];
+        if (!/\d/.test(event.key) && !allowedKeys.includes(event.key)) {
+            event.preventDefault();
         }
     }
 }
