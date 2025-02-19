@@ -6,63 +6,64 @@ import { UserService } from './user.service';
 })
 export class WebsocketService {
     private socket: WebSocket | undefined;
-    private listeners: ((event: MessageEvent<any>) => void)[] = []
+    private listeners: ((event: MessageEvent<any>) => void)[] = [];
 
-    constructor(private userService: UserService) {
-    }
+    constructor(private userService: UserService) {}
 
-    addListener(onMessageCallback: (event: MessageEvent<any>) => void) {
-        this.listeners.push(onMessageCallback)
+    addListener(onMessageCallback: (event: MessageEvent<any>) => void): void {
+        this.listeners.push(onMessageCallback);
     }
 
     connect(): void {
-        this.socket = new WebSocket('ws://localhost:3000')
+        this.socket = new WebSocket('ws://localhost:3000');
         this.socket.onopen = () => {
-            console.log('WebSocket connection established.')
-            this.sendUser()
+            console.log('WebSocket connection established.');
+            this.sendUser();
         };
 
         this.socket.onmessage = (event) => {
-            this.listeners.forEach(function (callback) {
-                callback(event)
-            })
-        }
+            this.listeners.forEach((callback) => {
+                callback(event);
+            });
+        };
 
         this.socket.onclose = (event) => {
-            console.log('WebSocket connection closed:', event)
-        }
+            console.log('WebSocket connection closed:', event);
+        };
 
         this.socket.onerror = (error) => {
-            console.error('WebSocket error:', error)
-        }
+            console.error('WebSocket error:', error);
+        };
     }
 
-    sendUserName() {
-        this.sendUser()
+    sendUserName(): void {
+        this.sendUser();
     }
 
     private sendUser(): void {
         if (this.isReady()) {
-            console.log(`Sending user name: ${this.userService.getUserName()}`)
-            this.socket!.send(`{ "action": "username", "sender": "${this.userService.getUserName()}" }`)
+            const userName = this.userService.getUserName();
+            console.log(`Sending user name: ${userName}`);
+            this.socket!.send(JSON.stringify({ action: 'username', sender: userName }));
         }
     }
 
-    sendGameSolved(solveTime: number) {
-        const userName = this.userService.getUserName()
+    sendGameSolved(solveTime: number): void {
+        const userName = this.userService.getUserName();
         if (this.isReady()) {
-            this.socket!.send(`{ "action": "message",  "sender": "${userName}", "solveTime": "${solveTime}", "data": "Pyramid solved by: ${userName}" }`)
+            this.socket!.send(JSON.stringify({ action: 'message', sender: userName, solveTime, data: `Pyramid solved by: ${userName}` }));
         }
     }
 
     sendRestart(): void {
         if (this.isReady()) {
-            this.socket!.send(`{ "action": "start",  "sender": "${this.userService.getUserName()}", "data": { "size": 3, "maxValue": 100 } }`)
+            const userName = this.userService.getUserName();
+            this.socket!.send(JSON.stringify({ action: 'start', sender: userName, data: { size: 3, maxValue: 100 } }));
         }
     }
 
     isReady(): boolean {
-        return this.socket?.readyState == 1
+        return this.socket?.readyState === WebSocket.OPEN;
     }
 
     close(): void {
