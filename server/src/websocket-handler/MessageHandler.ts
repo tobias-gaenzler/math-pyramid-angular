@@ -1,5 +1,5 @@
 import { UserManager } from '../user/UserManager';
-import ws from 'ws';
+import ws, { RawData } from 'ws';
 import { Instance } from 'express-ws';
 import { MathPyramidFactory } from '../math-pyramid/MathPyramidFactory';
 
@@ -14,16 +14,17 @@ export class MessageHandler {
         this.expressWebSocketServer = expressWebSocketServer;
     }
 
-    handleMessage(socket: ws, rawMessage: ws.MessageEvent): void {
+    handleMessage(socket: ws, rawMessage: RawData): void {
         let data;
+        console.log(`Received message: ${rawMessage}`);
         try {
-            data = JSON.parse(rawMessage.data.toString());
+            data = JSON.parse(rawMessage.toString());
         } catch (error) {
-            console.error(`Failed to parse message: ${rawMessage.data}`, error);
+            console.error(`Failed to parse message: ${rawMessage}`, error);
             return;
         }
 
-        const dataAsJson = JSON.stringify(rawMessage.data);
+        const dataAsJson = JSON.stringify(rawMessage);
         const userName = this.userManager.getUser(socket)?.name;
         console.log(`[${new Date().toISOString()}]: Received message: ${dataAsJson} from ${userName}`);
 

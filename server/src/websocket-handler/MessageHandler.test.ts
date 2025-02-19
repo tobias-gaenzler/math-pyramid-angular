@@ -3,6 +3,7 @@ import type ws from 'ws';
 import { MessageHandler } from './MessageHandler';
 import expressWs = require('express-ws')
 import express from 'express';
+import { RawData } from 'ws';
 
 describe('MessageHandler', () => {
 
@@ -24,7 +25,7 @@ describe('MessageHandler', () => {
     test('handleMessage should set username on action username', () => {
         // Arrange
         const setUserNameSpy = jest.spyOn(userManager, 'setUserName');
-        const rawMessage = { data: JSON.stringify({ action: 'username', sender: 'John' }), type: 'type', target: wsMock };
+        const rawMessage: RawData = Buffer.from(JSON.stringify({ action: 'username', sender: 'John' }));
 
         // Act
         messageHandler.handleMessage(wsMock, rawMessage);
@@ -35,7 +36,7 @@ describe('MessageHandler', () => {
 
     test('handleMessage should throw error for unknown action', () => {
         // Arrange
-        const rawMessage = { data: JSON.stringify({ action: 'unknown', sender: 'John' }), type: 'type', target: wsMock };
+        const rawMessage: RawData = Buffer.from(JSON.stringify({ action: 'unknown', sender: 'John' }));
 
         // Act & Assert
         expect(() => messageHandler.handleMessage(wsMock, rawMessage)).toThrow('Received unknown event: unknown');
@@ -44,7 +45,7 @@ describe('MessageHandler', () => {
     test('handleMessage should broadcast game data on action start', () => {
         // Arrange
         const broadcastSpy = jest.spyOn(messageHandler as any, 'broadcastMessage');
-        const rawMessage = { data: JSON.stringify({ action: 'start', data: { size: '3', maxValue: '10' } }), type: 'type', target: wsMock };
+        const rawMessage: RawData = Buffer.from(JSON.stringify({ action: 'start', data: { size: '3', maxValue: '10' } }));
 
         // Act
         messageHandler.handleMessage(wsMock, rawMessage);
