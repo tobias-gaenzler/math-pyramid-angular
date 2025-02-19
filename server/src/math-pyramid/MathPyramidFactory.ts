@@ -20,8 +20,7 @@ export class MathPyramidFactory {
         const solutionValues = this.createRandomSolution(size, maxValue);
         const startValues = this.getUniquelySolvableRandomStartValues(solutionValues);
 
-        console.log(`Start values: ${JSON.stringify(startValues)}`);
-        console.log(`Solution values: ${JSON.stringify(solutionValues)}`);
+        this.logGameData(startValues, solutionValues);
         return {
             size,
             startValues,
@@ -31,7 +30,6 @@ export class MathPyramidFactory {
 
     private createRandomSolution(size: number, maxValue: number): number[] {
         const maxValueInLowestRow = Math.max(2, Math.floor(maxValue / Math.pow(2, size - 1)));
-        // start values in bottom row of pyramid
         const randomSolution = Array.from({ length: size }, () => Math.floor(Math.random() * (maxValueInLowestRow - 1) + 1));
 
         return new MathPyramidSolver().solveBottomUp(size, randomSolution);
@@ -52,13 +50,8 @@ export class MathPyramidFactory {
             throw new Error(`Could not find a uniquely solvable solution in ${MathPyramidFactory.MAX_ITERATIONS} iterations.`);
         }
 
-        console.log(`Needed ${tries} iterations to find suitable start values.`);
-        const startValuesAsArray = Array(solutionValues.length).fill(null);
-        startValues.forEach((value, key) => {
-            startValuesAsArray[key] = value;
-        });
-
-        return startValuesAsArray;
+        console.info(`Needed ${tries} iterations to find suitable start values.`);
+        return this.convertMapToArray(startValues, solutionValues.length);
     }
 
     private getRandomStartValues(solutionValues: number[]): Map<number, number> {
@@ -86,5 +79,18 @@ export class MathPyramidFactory {
 
     private getSizeFromNumberOfBlocks(numberOfBlocks: number): number {
         return (Math.sqrt(1 + 8 * numberOfBlocks) - 1) / 2;
+    }
+
+    private convertMapToArray(map: Map<number, number>, length: number): Array<number | null> {
+        const array = Array(length).fill(null);
+        map.forEach((value, key) => {
+            array[key] = value;
+        });
+        return array;
+    }
+
+    private logGameData(startValues: Array<number | null>, solutionValues: number[]): void {
+        console.info(`Start values: ${JSON.stringify(startValues)}`);
+        console.info(`Solution values: ${JSON.stringify(solutionValues)}`);
     }
 }
