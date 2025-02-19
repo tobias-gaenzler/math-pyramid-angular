@@ -33,18 +33,19 @@ export class ToolbarComponent {
     }
 
     openDialog(): void {
-        const dialogRef = this.dialog.open(UserNameDialog, {
-            data: { name: this.name }
-        });
-
-        dialogRef.afterClosed().subscribe(result => {
-            if (result) {
-                this.userService.setUserName(result);
-                this.websocketService.sendUserName();
-                this.name = result;
-            }
-        }, error => {
-            console.error('Dialog closed with error:', error);
-        });
+        const dialogRef = this.dialog
+            .open(UserNameDialog, {
+                data: { name: this.name }
+            })
+            .afterClosed().subscribe({
+                next: (value) => {
+                    if (value) {
+                        this.userService.setUserName(value);
+                        this.websocketService.sendUserName();
+                        this.name = value;
+                    }
+                },
+                error: (error) => console.error('Dialog closed with error:', error)
+            });
     }
 }
