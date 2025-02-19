@@ -14,7 +14,7 @@ export class CloseHandler {
             console.info(`User ${user.toString()} is leaving the game with code: ${exitCode}`);
             this.userManager.deleteUser(socket);
         } else {
-            console.warn(`No user found for socket ${ws.toString()}. Exit code: ${exitCode}`);
+            console.warn(`No user found for socket. Exit code: ${exitCode}`);
         }
     }
 }
