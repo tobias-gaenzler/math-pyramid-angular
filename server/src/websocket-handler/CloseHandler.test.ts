@@ -5,7 +5,7 @@ import type ws from 'ws';
 
 
 describe('CloseHandler', () => {
-    let mockedWs: jest.MockedObject<ws>;
+    let mockedWs: jest.MockedObject<ws> = {} as jest.MockedObject<ws>;
     let userManager: UserManager;
     let closeHandler: CloseHandler;
 
