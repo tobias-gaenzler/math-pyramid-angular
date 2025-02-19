@@ -3,7 +3,6 @@ import type ws from 'ws';
 import { MessageHandler } from './MessageHandler';
 import expressWs = require('express-ws')
 import express from 'express';
-import e = require('express');
 
 describe('MessageHandler', () => {
 

@@ -15,7 +15,14 @@ export class MessageHandler {
     }
 
     handleMessage(socket: ws, rawMessage: ws.MessageEvent): void {
-        const data = JSON.parse(rawMessage.data.toString());
+        let data;
+        try {
+            data = JSON.parse(rawMessage.data.toString());
+        } catch (error) {
+            console.error(`Failed to parse message: ${rawMessage.data}`, error);
+            return;
+        }
+
         const dataAsJson = JSON.stringify(rawMessage.data);
         const userName = this.userManager.getUser(socket)?.name;
         console.log(`[${new Date().toISOString()}]: Received message: ${dataAsJson} from ${userName}`);
@@ -38,6 +45,7 @@ export class MessageHandler {
                 break;
             }
             default: {
+                console.error(`Received unknown event: ${data.action}`);
                 throw new Error(`Received unknown event: ${data.action}`);
             }
         }
