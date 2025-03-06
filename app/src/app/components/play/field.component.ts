@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, OnInit, SimpleChanges, ViewEncapsulation } from '@angular/core';
-import { GameService } from '../service/game.service';
+import { GameService } from '../../service/game.service';
 
 @Component({
     selector: 'field',

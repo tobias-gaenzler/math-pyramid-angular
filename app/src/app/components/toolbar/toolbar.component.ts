@@ -5,13 +5,13 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
-import { UserService } from '../service/user.service';
-import { AppRoutingModule } from '../app-routing.module';
+import { UserService } from '../../service/user.service';
+import { AppRoutingModule } from '../../app-routing.module';
 import { UserNameDialog } from './user-name-dialog';
-import { WebsocketService } from '../service/web-socket.service';
+import { WebsocketService } from '../../service/web-socket.service';
 import { ConfigDialog } from './config-dialog';
 import { config } from 'rxjs';
-import { ConfigService } from '../service/config.service';
+import { ConfigService } from '../../service/config.service';
 
 @Component({
     selector: 'toolbar',

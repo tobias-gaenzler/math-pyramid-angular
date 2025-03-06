@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MathPyramidModel } from "../models/math-pyramid";
-import { WebsocketService } from '../service/web-socket.service';
-import { GameService } from '../service/game.service';
+import { MathPyramidModel } from "../../models/math-pyramid";
+import { WebsocketService } from '../../service/web-socket.service';
+import { GameService } from '../../service/game.service';
 import { MatDialog } from '@angular/material/dialog';
 import { GameSolvedDialog } from './game-solved-dialog';
-import { UserService } from '../service/user.service';
+import { UserService } from '../../service/user.service';
 
 @Component({
     selector: 'app-play',

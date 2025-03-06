@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { MathPyramidModel } from '../models/math-pyramid';
+import { MathPyramidModel } from '../../models/math-pyramid';
 
 @Component({
     selector: 'row',
